@@ -15,6 +15,8 @@ import swtest101.cribbage.exception.InvalidRankException;
 public class ParseStringService {
 
 	public static final String INVALID_CARD_STRING_ERROR_MSG = "Input String is invalid. It should have two characters: first is the rank, second is the suit. ";
+	public static final String INVALID_CARD_STRING_FORMAT_ERROR_MSG = "Input String is invalid. It should have an even number of characters. ";
+	public static final String INVALID_CARD_STRING_NULL_ERROR_MSG = "Input String is invalid. A null reference was passed. ";
 	public static final String INVALID_RANK_CHAR_ERROR_MSG = "Input char is not a valid Rank: ";
 	public static final String INVALID_SUIT_CHAR_ERROR_MSG = "Input char is not a valid Suit: ";
 
@@ -89,8 +91,7 @@ public class ParseStringService {
 	}
 
 	public static List<Card> parseToListOfCards(String handOfCards) {
-		// numero ímpar de char  ex:. AH3CQ
-		// 
+
 		return null;
 	}
 

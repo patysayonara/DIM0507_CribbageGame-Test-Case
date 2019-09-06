@@ -22,9 +22,10 @@ public class ParseToListOfCardsExceptionalTest {
 	@Parameters(name = "{3}-{0}_ShouldThrow_{1}")
 	public static Collection<Object[]> buildData() {
 		return Arrays.asList(new Object[][] {
-				{ "ASQHK", InvalidRankException.class, ParseStringService.INVALID_CARD_STRING_ERROR_MSG, "InvalidStringLenght1" },
-				{ "A", InvalidRankException.class, ParseStringService.INVALID_CARD_STRING_ERROR_MSG, "InvalidStringLenght2" },				
-				{ null, NullPointerException.class, ParseStringService.INVALID_CARD_STRING_ERROR_MSG, "InvalidStringLenght3" },
+				{ "QCKHJA2H6DQ", InvalidRankException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength1" },
+				{ "ASQHK", InvalidRankException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength2" },
+				{ "A", InvalidRankException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength3" },
+				{ null, NullPointerException.class, ParseStringService.INVALID_CARD_STRING_NULL_ERROR_MSG, "InvalidStringLength4" },
 		});
 	}
 
@@ -44,10 +45,10 @@ public class ParseToListOfCardsExceptionalTest {
 	public String name;
 
 	@Test
-	public void testParseInvalidRank() {
+	public void testParseInvalidFormat() {
 		e.expect(expectedExceptionType);
 		e.expectMessage(expectedErrorMessage);
-
+		
 		ParseStringService.parseToCard(input);
 	}
 }
