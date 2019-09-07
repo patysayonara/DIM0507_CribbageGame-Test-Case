@@ -96,19 +96,16 @@ public class ParseStringService {
 		if (handOfCards.length()%2 == 1)
 			throw new InvalidStringLenghtException(INVALID_CARD_STRING_LENGTH_ERROR_MSG + handOfCards);
 
-		if (handOfCards.length() == 0)
-			throw new InvalidStringLenghtException(INVALID_CARD_STRING_LENGTH_ERROR_MSG + "EMPTY");
-		
-		
 		//FROM https://stackoverflow.com/questions/4788596/split-string-into-several-two-character-strings
 		List<String> arrayofCardStrings = Arrays.asList(handOfCards.split("(?<=\\G.{2})"));
 		List<Card> arrayofCard = new ArrayList<Card>();
 		
-		arrayofCardStrings.forEach((String cardString) -> {
-			Integer rank = defineRank(cardString.charAt(0));
-			Suit suit = defineSuit(cardString.charAt(1));
-			arrayofCard.add(new Card(rank, suit));
-		});		
+		if (handOfCards.length() != 0)
+			arrayofCardStrings.forEach((String cardString) -> {
+				Integer rank = defineRank(cardString.charAt(0));
+				Suit suit = defineSuit(cardString.charAt(1));
+				arrayofCard.add(new Card(rank, suit));
+			});		
 			
 		return arrayofCard;
 	}

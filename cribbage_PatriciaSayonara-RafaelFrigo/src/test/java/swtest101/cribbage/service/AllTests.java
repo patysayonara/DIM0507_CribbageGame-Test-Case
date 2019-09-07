@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses(value = { ScoringServiceTest.class, ParseToCardTest.class, ParseToCardExceptionalTest.class })
+@SuiteClasses(value = { ScoringServiceTest.class, ParseToCardTest.class, ParseToCardExceptionalTest.class, ParseToListOfCardsTest.class, ParseToListOfCardsExceptionalTest.class })
 public class AllTests {
 
 }

@@ -24,7 +24,6 @@ public class ParseToListOfCardsExceptionalTest {
 				{ "QCKHJA2H6DQ", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_LENGTH_ERROR_MSG, "InvalidStringLength1" },
 				{ "ASQHK", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_LENGTH_ERROR_MSG, "InvalidStringLength2" },
 				{ "A", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_LENGTH_ERROR_MSG, "InvalidStringLength3" },
-				{ "", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_LENGTH_ERROR_MSG, "InvalidStringLength4" },
 		});
 	}
 
