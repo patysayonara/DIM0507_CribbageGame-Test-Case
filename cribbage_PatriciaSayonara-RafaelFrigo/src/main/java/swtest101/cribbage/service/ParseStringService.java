@@ -98,16 +98,14 @@ public class ParseStringService {
 
 		//FROM https://stackoverflow.com/questions/4788596/split-string-into-several-two-character-strings
 		List<String> arrayofCardStrings = Arrays.asList(handOfCards.split("(?<=\\G.{2})"));
-		List<Card> arrayofCard = new ArrayList<Card>();
+		List<Card> arrayOfCard = new ArrayList<Card>();
 		
 		if (handOfCards.length() != 0)
-			arrayofCardStrings.forEach((String cardString) -> {
-				Integer rank = defineRank(cardString.charAt(0));
-				Suit suit = defineSuit(cardString.charAt(1));
-				arrayofCard.add(new Card(rank, suit));
+			arrayofCardStrings.forEach((String cardStr) -> {
+				arrayOfCard.add(parseToCard(cardStr));
 			});		
 			
-		return arrayofCard;
+		return arrayOfCard;
 	}
 
 }
