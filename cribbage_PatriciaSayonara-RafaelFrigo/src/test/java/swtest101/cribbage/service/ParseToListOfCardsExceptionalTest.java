@@ -21,9 +21,10 @@ public class ParseToListOfCardsExceptionalTest {
 	@Parameters(name = "{3}-{0}_ShouldThrow_{1}")
 	public static Collection<Object[]> buildData() {
 		return Arrays.asList(new Object[][] {
-				{ "QCKHJA2H6DQ", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength1" },
-				{ "ASQHK", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength2" },
-				{ "A", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength3" },
+				{ "QCKHJA2H6DQ", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_LENGTH_ERROR_MSG, "InvalidStringLength1" },
+				{ "ASQHK", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_LENGTH_ERROR_MSG, "InvalidStringLength2" },
+				{ "A", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_LENGTH_ERROR_MSG, "InvalidStringLength3" },
+				{ "", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_LENGTH_ERROR_MSG, "InvalidStringLength4" },
 		});
 	}
 
@@ -47,6 +48,6 @@ public class ParseToListOfCardsExceptionalTest {
 		e.expect(expectedExceptionType);
 		e.expectMessage(expectedErrorMessage);
 		
-		ParseStringService.parseToCard(input);
+		ParseStringService.parseToListOfCards(input);
 	}
 }
