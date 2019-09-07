@@ -5,18 +5,20 @@ import static swtest101.cribbage.entity.Suit.DIAMONDS;
 import static swtest101.cribbage.entity.Suit.HEARTS;
 import static swtest101.cribbage.entity.Suit.SPADES;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import swtest101.cribbage.entity.Card;
 import swtest101.cribbage.entity.Suit;
 import swtest101.cribbage.exception.InputParseException;
 import swtest101.cribbage.exception.InvalidRankException;
+import swtest101.cribbage.exception.InvalidStringLenghtException;
 
 public class ParseStringService {
 
 	public static final String INVALID_CARD_STRING_ERROR_MSG = "Input String is invalid. It should have two characters: first is the rank, second is the suit. ";
-	public static final String INVALID_CARD_STRING_FORMAT_ERROR_MSG = "Input String is invalid. It should have an even number of characters. ";
-	public static final String INVALID_CARD_STRING_NULL_ERROR_MSG = "Input String is invalid. A null reference was passed. ";
+	public static final String INVALID_CARD_STRING_LENGTH_ERROR_MSG = "Input String is invalid. It should have an even number of characters. ";
 	public static final String INVALID_RANK_CHAR_ERROR_MSG = "Input char is not a valid Rank: ";
 	public static final String INVALID_SUIT_CHAR_ERROR_MSG = "Input char is not a valid Suit: ";
 
@@ -89,10 +91,26 @@ public class ParseStringService {
 
 		return card;
 	}
-
 	public static List<Card> parseToListOfCards(String handOfCards) {
+		
+		if (handOfCards.length()%2 == 1)
+			throw new InvalidStringLenghtException(INVALID_CARD_STRING_LENGTH_ERROR_MSG + handOfCards);
 
-		return null;
+		if (handOfCards.length() == 0)
+			throw new InvalidStringLenghtException(INVALID_CARD_STRING_LENGTH_ERROR_MSG + "EMPTY");
+		
+		
+		//FROM https://stackoverflow.com/questions/4788596/split-string-into-several-two-character-strings
+		List<String> arrayofCardStrings = Arrays.asList(handOfCards.split("(?<=\\G.{2})"));
+		List<Card> arrayofCard = new ArrayList<Card>();
+		
+		arrayofCardStrings.forEach((String cardString) -> {
+			Integer rank = defineRank(cardString.charAt(0));
+			Suit suit = defineSuit(cardString.charAt(1));
+			arrayofCard.add(new Card(rank, suit));
+		});		
+			
+		return arrayofCard;
 	}
 
 }
