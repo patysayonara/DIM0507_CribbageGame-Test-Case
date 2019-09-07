@@ -13,8 +13,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-
-import swtest101.cribbage.exception.InvalidRankException;
+import swtest101.cribbage.exception.InvalidStringLenghtException;
 
 @RunWith (Parameterized.class)
 public class ParseToListOfCardsExceptionalTest {
@@ -22,9 +21,9 @@ public class ParseToListOfCardsExceptionalTest {
 	@Parameters(name = "{3}-{0}_ShouldThrow_{1}")
 	public static Collection<Object[]> buildData() {
 		return Arrays.asList(new Object[][] {
-				{ "QCKHJA2H6DQ", InvalidRankException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength1" },
-				{ "ASQHK", InvalidRankException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength2" },
-				{ "A", InvalidRankException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength3" },
+				{ "QCKHJA2H6DQ", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength1" },
+				{ "ASQHK", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength2" },
+				{ "A", InvalidStringLenghtException.class, ParseStringService.INVALID_CARD_STRING_FORMAT_ERROR_MSG, "InvalidStringLength3" },
 				{ null, NullPointerException.class, ParseStringService.INVALID_CARD_STRING_NULL_ERROR_MSG, "InvalidStringLength4" },
 		});
 	}
