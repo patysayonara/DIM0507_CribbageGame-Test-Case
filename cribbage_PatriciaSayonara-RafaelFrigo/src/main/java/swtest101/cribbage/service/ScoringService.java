@@ -23,8 +23,8 @@ public class ScoringService {
 		return res;
 	}
 	
-	//Combinacao sem repeticao
-	private static int combinations(int numElements, int pattern) {
+	//Numero de combinacoes sem repeticao
+	private static int numOfCombinations(int numElements, int pattern) {
 		int comb;
 		
 		comb = factorial(numElements)/(factorial(pattern)*factorial(numElements-pattern));
@@ -52,7 +52,7 @@ public class ScoringService {
 		for (Integer key : keys) {
 			int current = ranks.get(key);
 			if(current > 1) {
-				score += combinations(current,2)*2;
+				score += numOfCombinations(current,2)*2;
 			}
 		}
 		
