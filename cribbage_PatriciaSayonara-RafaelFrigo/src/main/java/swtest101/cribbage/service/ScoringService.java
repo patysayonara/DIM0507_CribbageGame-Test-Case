@@ -2,9 +2,11 @@ package swtest101.cribbage.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.paukov.combinatorics3.Generator;
 
@@ -65,8 +67,30 @@ public class ScoringService {
 	
 	// Straight (sequência de 3 cartas ou mais): 1 ponto por carta
 	private static Integer calcCombinationStraight() {
+		Set<Integer> rankSet = new TreeSet<Integer>();
+		int sequenceCounter = 0;
 		
-		return null;
+		for(Card card: cards) 
+			rankSet.add(card.getRank());
+		
+		Iterator<Integer> previousIterator = rankSet.iterator();
+		Integer previousValue;
+		Iterator<Integer> actualIterator = rankSet.iterator();
+		Integer actualValue;
+		actualValue = actualIterator.next();
+		while(actualIterator.hasNext()){
+			previousValue = previousIterator.next();
+			actualValue = actualIterator.next();
+			if (previousValue + 1 == actualValue)
+				sequenceCounter++;
+		}
+		
+		if(sequenceCounter > 2)
+			sequenceCounter -= 2;
+		else
+			sequenceCounter = 0;
+		
+		return sequenceCounter;
 	}
 	
 	//Flush (4 ou 5 cartas com o mesmo naipe): 1 ponto por carta
@@ -120,7 +144,7 @@ public class ScoringService {
 		int sum = 0;
 		List<Integer> ranks = new ArrayList<Integer>();
 		for(Card card: cards) {
-			if(card.getRank() == 13 || card.getRank() == 12 || card.getRank() == 11) {
+			if(card.getRank() > 10) {
 				ranks.add(10);
 			}
 			else {
@@ -154,7 +178,7 @@ public class ScoringService {
 		cards = ParseStringService.parseToListOfCards(handOfCards);
 		
 		score += calcCombinationPair();
-		//score += calcCombinationStraight();
+		score += calcCombinationStraight();
 		score += calcCombinationFlush();
 		score += calcCombinationNob();
 		score += calcCombination15();
