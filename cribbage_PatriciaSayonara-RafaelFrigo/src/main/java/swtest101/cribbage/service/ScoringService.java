@@ -1,6 +1,7 @@
 package swtest101.cribbage.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -66,7 +67,7 @@ public class ScoringService {
 	
 	
 	// Straight (sequência de 3 cartas ou mais): 1 ponto por carta
-	private static Integer calcCombinationStraight() {
+	/*private static Integer calcCombinationStraight() {
 		Set<Integer> rankSet = new TreeSet<Integer>();
 		int sequenceCounter = 0;
 		
@@ -91,6 +92,46 @@ public class ScoringService {
 			sequenceCounter = 0;
 		
 		return sequenceCounter;
+	}*/
+	
+	private static Integer calcCombinationStraight() {
+		List<Integer> rankList = new ArrayList<Integer>();
+		
+		for(Card card: cards) {
+			rankList.add(card.getRank());
+		}
+		
+		Collections.sort(rankList);
+		int suitsForARankCount = 1;
+		int sequenceCount = 1;
+		int aux = 2;
+		//System.out.println(rankList);
+		
+		for(int i = 1; i < rankList.size(); i++) {
+			if(rankList.get(i-1).equals(rankList.get(i))) {
+				suitsForARankCount++;
+			}
+			
+			if(rankList.get(i).equals(rankList.get(i-1)+1)) {
+				sequenceCount++;
+			}
+			else {
+				if(sequenceCount > aux) {
+					aux = sequenceCount;
+				}
+				sequenceCount = 1;
+			}
+		}
+		
+		//System.out.println(suitsForARankCount);
+		//System.out.println(sequenceCount);
+		
+		int score = 0;
+		if(aux > 2) {
+			score = suitsForARankCount*aux;
+		}
+		
+		return score;
 	}
 	
 	//Flush (4 ou 5 cartas com o mesmo naipe): 1 ponto por carta
