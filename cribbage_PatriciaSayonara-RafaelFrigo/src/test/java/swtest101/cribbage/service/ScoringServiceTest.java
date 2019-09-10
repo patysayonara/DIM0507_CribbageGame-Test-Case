@@ -24,21 +24,21 @@ public class ScoringServiceTest {
 	public static Collection<Object[]> buildData() {
 		return Arrays.asList(new Object[][] {
 				{"PairTest", "AS9HJCKDAH", 2},
-				{"PairTest", "5S9H5CJDKH", 2},
+				{"PairTest", "4S9H4CJDKH", 2},
 				{"PairTest", "QS0H8C6DQH", 2},
 				{"PairTest", "4S7HJC9DJH", 2},
 				{"PairTest", "7S9HKCJDKH", 2},
-				{"StraightTest", "AS3H7C8D9S", 3},
-				{"StraightTest", "AS7H8C3D9S", 3},
+				{"StraightTest", "AS3H8C9D0S", 3},
+				{"StraightTest", "AS9H8C3D0S", 3},
 				{"StraightTest", "ASJHQCKD9S", 3},
 				{"StraightTest", "9SKHQCJDAS", 3},
-				{"StraightTest", "AS0H9C8D7S", 4},
-				{"StraightTest", "6S7H8C9D0S", 5},
+				{"StraightTest", "ASJH0C9D8S", 4},
+				{"StraightTest", "9S0HJCQDKS", 5},
 				{"StraightTest", "QS9H0CJDKS", 5},
-				{"FlushTest", "AS3SKS7S9D",4},
-				{"FlushTest", "AD3DKD7D9H",4},
-				{"FlushTest", "AH3HKH7H9C",4},
-				{"FlushTest", "AC3CKC7C9S",4},
+				{"FlushTest", "AD3SKS7S9S",4},
+				{"FlushTest", "AH3DKD7D9D",4},
+				{"FlushTest", "AC3HKH7H9H",4},
+				{"FlushTest", "AS3CKC7C9C",4},
 				{"FlushTest", "AS3SKS7S9S",5},
 				{"FlushTest", "AD3DKD7D9D",5},
 				{"FlushTest", "AH3HKH7H9H",5},
@@ -50,7 +50,11 @@ public class ScoringServiceTest {
 				{"FifteenTest", "QD5CAH2S6D", 2},
 				{"FifteenTest", "KD4CAH2S6D", 2},
 				{"FifteenTest", "AD2C5H7S9D", 4},
-				{"FifteenTest", "0D3C2H5S7D", 6}
+				{"FifteenTest", "0D3C2H5S7D", 6},
+				{"PairFifteenTest", "QH2CKC2S3C", 10},
+				{"PairStraightFifteenTest", "8H9D2H8C7S", 12},
+				{"PairStraightFifteenTest", "2C3S4S2S0H", 12},
+				{"StraightNobFifteenTest", "6C4D5DJCKS", 10}
 		});
 	}
 	
