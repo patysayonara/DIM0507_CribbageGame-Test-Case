@@ -94,6 +94,8 @@ public class ScoringService {
 
 	//Nob (se o jogador tiver um valete do mesmo naipe da Start Card): 1 ponto
 	private static Integer calcCombinationNob() {
+		int score = 0;
+		
 		Suit startCardSuit = cards.get(0).getSuit();
 		
 		ListIterator<Card> iter = cards.listIterator(1);
@@ -101,11 +103,11 @@ public class ScoringService {
 		while(iter.hasNext()) {
 			Card currentCard = iter.next();
 			if(currentCard.getRank().equals(11) && startCardSuit.equals(currentCard.getSuit())) {
-				return 1;
+				score++;
 			}
 		}
 		
-		return 0;
+		return score;
 	}
 	
 	//15 (qualquer combinação de cartas que some 15): 2 pontos 
