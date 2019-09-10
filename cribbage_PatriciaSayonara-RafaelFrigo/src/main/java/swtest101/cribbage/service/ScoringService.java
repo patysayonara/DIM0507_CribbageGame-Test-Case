@@ -1,9 +1,12 @@
 package swtest101.cribbage.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+
+import org.paukov.combinatorics3.Generator;
 
 import swtest101.cribbage.entity.Card;
 import swtest101.cribbage.entity.Suit;
@@ -113,7 +116,25 @@ public class ScoringService {
 	//15 (qualquer combinação de cartas que some 15): 2 pontos 
 	//(Obs.: para a soma dos 15, as cartas Rei, Dama e Valete valem 10 e o Ás vale 1)
 	private static Integer calcCombination15() {
-		return null;
+		List<Integer> combinations = new ArrayList<Integer>();
+		int sum = 0;
+		
+		for(int i = 2; i <= 5; i++) {
+			//FROM https://www.baeldung.com/java-combinations-algorithm
+			Generator.combination(cards.get(0).getRank(), cards.get(1).getRank(), 
+					cards.get(2).getRank(), cards.get(3).getRank(), cards.get(4).getRank())
+				.simple(i)
+				.stream()
+				.forEach(comb -> combinations.add(comb.stream().mapToInt(Integer::intValue).sum())); //FROM https://stackoverflow.com/questions/5963847/is-there-possibility-of-sum-of-arraylist-without-looping
+		}
+			
+		for(Integer sumComb: combinations) {
+			if(sumComb == 15) {
+				sum++;
+			}
+		}
+		
+		return sum*2;
 	}
 
 
@@ -126,7 +147,7 @@ public class ScoringService {
 		//score += calcCombinationStraight();
 		score += calcCombinationFlush();
 		score += calcCombinationNob();
-		//score += calcCombination15();
+		score += calcCombination15();
 		
 		return score;
 	}
