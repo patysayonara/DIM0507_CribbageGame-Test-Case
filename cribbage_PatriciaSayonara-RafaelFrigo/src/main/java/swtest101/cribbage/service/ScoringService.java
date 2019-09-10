@@ -66,34 +66,8 @@ public class ScoringService {
 	}
 	
 	
+	//IMCOMPLETO
 	// Straight (sequência de 3 cartas ou mais): 1 ponto por carta
-	/*private static Integer calcCombinationStraight() {
-		Set<Integer> rankSet = new TreeSet<Integer>();
-		int sequenceCounter = 0;
-		
-		for(Card card: cards) 
-			rankSet.add(card.getRank());
-		
-		Iterator<Integer> previousIterator = rankSet.iterator();
-		Integer previousValue;
-		Iterator<Integer> actualIterator = rankSet.iterator();
-		Integer actualValue;
-		actualValue = actualIterator.next();
-		while(actualIterator.hasNext()){
-			previousValue = previousIterator.next();
-			actualValue = actualIterator.next();
-			if (previousValue + 1 == actualValue)
-				sequenceCounter++;
-		}
-		
-		if(sequenceCounter > 2)
-			sequenceCounter -= 2;
-		else
-			sequenceCounter = 0;
-		
-		return sequenceCounter;
-	}*/
-	
 	private static Integer calcCombinationStraight() {
 		List<Integer> rankList = new ArrayList<Integer>();
 		
@@ -104,8 +78,7 @@ public class ScoringService {
 		Collections.sort(rankList);
 		int suitsForARankCount = 1;
 		int sequenceCount = 1;
-		int aux = 2;
-		//System.out.println(rankList);
+		int score = 0;
 		
 		for(int i = 1; i < rankList.size(); i++) {
 			if(rankList.get(i-1).equals(rankList.get(i))) {
@@ -116,19 +89,16 @@ public class ScoringService {
 				sequenceCount++;
 			}
 			else {
-				if(sequenceCount > aux) {
-					aux = sequenceCount;
+				if(sequenceCount*suitsForARankCount > score) {
+					score = sequenceCount*suitsForARankCount;
 				}
 				sequenceCount = 1;
+				suitsForARankCount = 1;
 			}
 		}
 		
-		//System.out.println(suitsForARankCount);
-		//System.out.println(sequenceCount);
-		
-		int score = 0;
-		if(aux > 2) {
-			score = suitsForARankCount*aux;
+		if(score < 3) {
+			return 0;
 		}
 		
 		return score;
