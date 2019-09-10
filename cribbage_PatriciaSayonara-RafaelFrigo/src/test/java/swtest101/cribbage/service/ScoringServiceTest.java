@@ -3,10 +3,6 @@ package swtest101.cribbage.service;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static swtest101.cribbage.entity.Suit.CLUBS;
-import static swtest101.cribbage.entity.Suit.DIAMONDS;
-import static swtest101.cribbage.entity.Suit.HEARTS;
-import static swtest101.cribbage.entity.Suit.SPADES;
 
 import java.util.Arrays;
 import java.util.Collection;
