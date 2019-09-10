@@ -28,7 +28,7 @@ public class ScoringServiceTest {
 				{"PairTest", "QS0H8C6DQH", 2},
 				{"PairTest", "4S7HJC9DJH", 2},
 				{"PairTest", "7S9HKCJDKH", 2},
-				{"PairTest", "8S3H4D3C3S", 6},
+				{"PairTest", "8S2H4D2C2S", 6},
 				{"PairTest", "4S4H4C5S4D", 12},
 				{"StraightTest", "AS3H8C9D0S", 3},
 				{"StraightTest", "AS9H8C3D0S", 3},
