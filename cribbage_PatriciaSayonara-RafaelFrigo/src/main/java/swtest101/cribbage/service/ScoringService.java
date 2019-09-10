@@ -118,11 +118,21 @@ public class ScoringService {
 	private static Integer calcCombination15() {
 		List<Integer> combinations = new ArrayList<Integer>();
 		int sum = 0;
+		List<Integer> ranks = new ArrayList<Integer>();
+		for(Card card: cards) {
+			if(card.getRank() == 13 || card.getRank() == 12 || card.getRank() == 11) {
+				ranks.add(10);
+			}
+			else {
+				ranks.add(card.getRank());
+			}
+		}
+		
 		
 		for(int i = 2; i <= 5; i++) {
 			//FROM https://www.baeldung.com/java-combinations-algorithm
-			Generator.combination(cards.get(0).getRank(), cards.get(1).getRank(), 
-					cards.get(2).getRank(), cards.get(3).getRank(), cards.get(4).getRank())
+			Generator.combination(ranks.get(0), ranks.get(1), ranks.get(2), 
+					ranks.get(3), ranks.get(4))
 				.simple(i)
 				.stream()
 				.forEach(comb -> combinations.add(comb.stream().mapToInt(Integer::intValue).sum())); //FROM https://stackoverflow.com/questions/5963847/is-there-possibility-of-sum-of-arraylist-without-looping
