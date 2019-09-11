@@ -65,42 +65,36 @@ public class ScoringService {
 		return score;
 	}
 	
-	
-	//IMCOMPLETO
-	// Straight (sequência de 3 cartas ou mais): 1 ponto por carta
+	//INCOMPLETO
+	// Straight (sequência de 3 cartas ou mais): 1 ponto por carta	
 	private static Integer calcCombinationStraight() {
 		List<Integer> rankList = new ArrayList<Integer>();
 		
 		for(Card card: cards) {
 			rankList.add(card.getRank());
 		}
-		
+
 		Collections.sort(rankList);
 		int suitsForARankCount = 1;
-		int sequenceCount = 1;
+		int sequenceCount = 0;
 		int score = 0;
-		
+
 		for(int i = 1; i < rankList.size(); i++) {
 			if(rankList.get(i-1).equals(rankList.get(i))) {
 				suitsForARankCount++;
 			}
-			
+				
 			if(rankList.get(i).equals(rankList.get(i-1)+1)) {
 				sequenceCount++;
-			}
-			else {
-				if(sequenceCount*suitsForARankCount > score) {
-					score = sequenceCount*suitsForARankCount;
-				}
-				sequenceCount = 1;
-				suitsForARankCount = 1;
-			}
+			} 
 		}
-		
-		if(score < 3) {
-			return 0;
-		}
-		
+
+		if(sequenceCount!=0) 
+			sequenceCount++;
+
+		if(sequenceCount > 2) 
+			score = suitsForARankCount*sequenceCount;
+
 		return score;
 	}
 	
