@@ -49,6 +49,7 @@ public class ScoringServiceTest {
 				{"FifteenTest", "KD4CAH2S6D", 2},
 				{"FifteenTest", "AD2C5H7S9D", 4},
 				{"FifteenTest", "0D3C2H5S7D", 6},
+				{"PairStraightTest", "ASAH9H0CJD", 5},
 				{"PairFifteenTest", "QH2CKC2S3C", 10},
 				{"PairStraightFifteenTest", "8H9D2H8C7S", 12},
 				{"PairStraightFifteenTest", "2C3S4S2S0H", 12},
