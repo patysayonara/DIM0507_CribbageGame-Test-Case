@@ -65,7 +65,7 @@ public class ScoringService {
 		return score;
 	}
 	
-	//INCOMPLETO
+/*	//INCOMPLETO
 	// Straight (sequência de 3 cartas ou mais): 1 ponto por carta	
 	private static Integer calcCombinationStraight() {
 		List<Integer> rankList = new ArrayList<Integer>();
@@ -97,6 +97,61 @@ public class ScoringService {
 
 		return score;
 	}
+*/
+	
+	private static Integer calcCombinationStraight() {
+		List<Integer> rankList = new ArrayList<Integer>();
+		
+		for(Card card: cards) {
+			rankList.add(card.getRank());
+		}
+
+		Collections.sort(rankList);
+		int suitsForARankCount = 1;
+		int sequenceCount = 0;
+		//int score = 0;
+		int aux_sequence = 0;
+		int aux_suits = 1;
+
+		for(int i = 1; i < rankList.size(); i++) {
+			if(rankList.get(i-1).equals(rankList.get(i))) {
+				suitsForARankCount++;
+				continue;
+			}
+				
+			if(rankList.get(i).equals(rankList.get(i-1)+1)) {
+				sequenceCount++;
+			}
+			else {
+				if(sequenceCount > 1) {
+					sequenceCount++;
+					if(sequenceCount > aux_sequence) {
+						aux_sequence = sequenceCount;
+						aux_suits = suitsForARankCount;
+					}
+				}
+				
+				sequenceCount = 0;
+				suitsForARankCount = 1;
+			}
+		}
+
+		if(sequenceCount!=0) { 
+			sequenceCount++;
+		}
+			
+		if((sequenceCount > 2) && (sequenceCount > aux_sequence)) { 
+			aux_sequence = sequenceCount;
+		}
+
+		if((aux_suits > 1) && (aux_suits > suitsForARankCount)) {
+			suitsForARankCount = aux_suits;
+		}
+		
+		return aux_sequence*suitsForARankCount;
+	}
+	
+	
 	
 	//Flush (4 ou 5 cartas com o mesmo naipe): 1 ponto por carta
 	private static Integer calcCombinationFlush() {
