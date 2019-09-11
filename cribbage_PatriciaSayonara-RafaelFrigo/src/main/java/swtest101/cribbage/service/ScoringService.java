@@ -99,56 +99,39 @@ public class ScoringService {
 	}
 */
 	
+	
+	
 	private static Integer calcCombinationStraight() {
 		List<Integer> rankList = new ArrayList<Integer>();
+		int score = 0;
+		int suitsForARankCount = 1;
+		int sequenceCount = 0;
 		
 		for(Card card: cards) {
 			rankList.add(card.getRank());
 		}
 
 		Collections.sort(rankList);
-		int suitsForARankCount = 1;
-		int sequenceCount = 0;
-		//int score = 0;
-		int aux_sequence = 0;
-		int aux_suits = 1;
 
 		for(int i = 1; i < rankList.size(); i++) {
 			if(rankList.get(i-1).equals(rankList.get(i))) {
 				suitsForARankCount++;
-				continue;
-			}
-				
-			if(rankList.get(i).equals(rankList.get(i-1)+1)) {
+			} else if(rankList.get(i).equals(rankList.get(i-1)+1)) {
 				sequenceCount++;
-			}
-			else {
-				if(sequenceCount > 1) {
-					sequenceCount++;
-					if(sequenceCount > aux_sequence) {
-						aux_sequence = sequenceCount;
-						aux_suits = suitsForARankCount;
-					}
+			} else {
+				if(sequenceCount < 2) {
+					sequenceCount = 0;
+					suitsForARankCount = 1;
 				}
-				
-				sequenceCount = 0;
-				suitsForARankCount = 1;
 			}
-		}
-
-		if(sequenceCount!=0) { 
-			sequenceCount++;
-		}
-			
-		if((sequenceCount > 2) && (sequenceCount > aux_sequence)) { 
-			aux_sequence = sequenceCount;
-		}
-
-		if((aux_suits > 1) && (aux_suits > suitsForARankCount)) {
-			suitsForARankCount = aux_suits;
 		}
 		
-		return aux_sequence*suitsForARankCount;
+		if (sequenceCount >= 2) {
+			sequenceCount++;
+			score = sequenceCount*suitsForARankCount;
+		}
+		
+		return score;
 	}
 	
 	
