@@ -65,8 +65,7 @@ public class ScoringService {
 		return score;
 	}
 	
-/*	//INCOMPLETO
-	// Straight (sequência de 3 cartas ou mais): 1 ponto por carta	
+	// Straight (sequência de 3 cartas ou mais): 1 ponto por carta		
 	private static Integer calcCombinationStraight() {
 		List<Integer> rankList = new ArrayList<Integer>();
 		
@@ -76,64 +75,44 @@ public class ScoringService {
 
 		Collections.sort(rankList);
 		int suitsForARankCount = 1;
+		int aux_suits = 1;
 		int sequenceCount = 0;
-		int score = 0;
-
-		for(int i = 1; i < rankList.size(); i++) {
-			if(rankList.get(i-1).equals(rankList.get(i))) {
-				suitsForARankCount++;
-			}
-				
-			if(rankList.get(i).equals(rankList.get(i-1)+1)) {
-				sequenceCount++;
-			} 
-		}
-
-		if(sequenceCount!=0) 
-			sequenceCount++;
-
-		if(sequenceCount > 2) 
-			score = suitsForARankCount*sequenceCount;
-
-		return score;
-	}
-*/
-	
-	
-	
-	private static Integer calcCombinationStraight() {
-		List<Integer> rankList = new ArrayList<Integer>();
-		int score = 0;
-		int suitsForARankCount = 1;
-		int sequenceCount = 0;
-		
-		for(Card card: cards) {
-			rankList.add(card.getRank());
-		}
-
-		Collections.sort(rankList);
+		int aux_sequence = 0;
 
 		for(int i = 1; i < rankList.size(); i++) {
 			if(rankList.get(i-1).equals(rankList.get(i))) {
 				suitsForARankCount++;
 			} else if(rankList.get(i).equals(rankList.get(i-1)+1)) {
 				sequenceCount++;
-			} else {
-				if(sequenceCount < 2) {
-					sequenceCount = 0;
-					suitsForARankCount = 1;
+			}
+			else {
+				if(sequenceCount > 1) {
+					sequenceCount++;
+					if(sequenceCount > aux_sequence) {
+						aux_sequence = sequenceCount;
+						aux_suits = suitsForARankCount;
+					}
 				}
+				
+				sequenceCount = 0;
+				suitsForARankCount = 1;
 			}
 		}
-		
-		if (sequenceCount >= 2) {
+
+		if(sequenceCount!=0) { 
 			sequenceCount++;
-			score = sequenceCount*suitsForARankCount;
+		}
+			
+		if((sequenceCount > 2) && (sequenceCount > aux_sequence)) { 
+			aux_sequence = sequenceCount;
+		}
+
+		if((aux_suits > 1) && (aux_suits > suitsForARankCount)) {
+			suitsForARankCount = aux_suits;
 		}
 		
-		return score;
+		return aux_sequence*suitsForARankCount;
 	}
-	
 	
 	
 	//Flush (4 ou 5 cartas com o mesmo naipe): 1 ponto por carta
@@ -182,7 +161,7 @@ public class ScoringService {
 	
 	//15 (qualquer combinação de cartas que some 15): 2 pontos 
 	//(Obs.: para a soma dos 15, as cartas Rei, Dama e Valete valem 10 e o Ás vale 1)
-	private static Integer calcCombination15() {
+	private static Integer calcCombinationFifteen() {
 		List<Integer> combinations = new ArrayList<Integer>();
 		int sum = 0;
 		List<Integer> ranks = new ArrayList<Integer>();
@@ -224,7 +203,7 @@ public class ScoringService {
 		score += calcCombinationStraight();
 		score += calcCombinationFlush();
 		score += calcCombinationNob();
-		score += calcCombination15();
+		score += calcCombinationFifteen();
 		
 		return score;
 	}
